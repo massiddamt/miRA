@@ -1,0 +1,36 @@
+samples: config/samples.tsv
+units: config/units.tsv
+
+resources:
+    reference: /path/to/reference/reference_genome.fasta
+    htseq_gff: /path/to/reference/hsa.gff3
+    mirna_mature: "hsa_mature"
+    mirna_mature_fa: /path/to/reference/miRBase_main_mature.fasta
+    mirna_hairpin: "hsa_hairpin"
+    mirna_hairpin_fa: /path/to/reference/miRBase_main_precursors.fasta
+    mirna_other: "mirna_other"
+    mirna_other_fa: /path/to/reference/miRBase_other_mature.fasta
+    pirna_fa: /path/to/reference/hsa.piRNA.fasta
+
+
+params:
+    trim_galore:
+        arguments: "--trim-n --length 16 --max_length 50 --dont_gzip "
+    multiqc:
+        arguments: "--force "
+    bowtie_mapping:
+        genome_params: "-v 2 -m 10 -a"
+        strict_params: "-n 0 -l 30 --norc --best --strata -m 1"
+        strict_multimap_params: "-n 0 -l 30 --norc -m 10 -a "
+        mismatch_params: "-n 2 -l 30 --norc --best --strata -m 1"
+        mismatch_multimap_params: "-n 2 -l 30 --norc -m 10 -a "
+    mir_trace:
+        arguments: "-s hsa"
+    htseq:
+        params: "-f bam -r pos -t miRNA -i Name"
+
+
+paths:
+    workdir: "/path/to/workdir"
+    results_dir: "/path/to/results_dir"
+    tmp_dir: "/path/to/tmp_dir"
