@@ -6,7 +6,7 @@ rule samtools_sam_to_bam_mirbase1:
         bam=temp(resolve_results_filepath(
             config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature.bam"))
     params:
-        genome=config.get("mirna_mature_fa"),
+        genome=config.get("resources").get("mirna_mature_fa"),
         output_fmt="BAM"
     conda:
         resolve_single_filepath(

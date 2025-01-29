@@ -38,7 +38,7 @@ rule UMI_tools:
         "--extract-method=regex "
         "--bc-pattern='.+(?P<discard_1>AACTGTAGGCACCATCAAT)"
         "{{s<=2}}"
-        "(?P<umi_1>.{{12}})(?P<discard_2>.+)'"
+        "(?P<umi_1>.{{12}})(?P<discard_2>.*)'"
 
 
 rule umi_deduplication:

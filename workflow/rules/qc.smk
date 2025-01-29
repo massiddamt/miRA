@@ -70,7 +70,7 @@ rule mirtrace:
         outdir=resolve_results_filepath(
             config.get("paths").get("results_dir"),"mir_trace/{sample}"),
         params="--force",
-        species=config.get("params").get("mir_trace").get("params")
+        species=config.get("params").get("mir_trace").get("arguments")
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),"logs/mirtrace/{sample}.mirtrace_qc.log")

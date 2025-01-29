@@ -5,7 +5,7 @@ This workflow performs miRNA analysis from `fastq` to `counts`.
 
 ## Authors
 
-* [Matteo Massidda](https://github.com/massiddamt), University of Sassari
+* [Matteo Massidda](https://github.com/massiddamt), Institute for Genetic and Biomedical Research (IRGB) - National Research Council (CNR)
 
 ## Usage
 
