@@ -35,7 +35,7 @@ rule samtools_sam_to_bam_mirbase2:
         bam=temp(resolve_results_filepath(
             config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature2.bam"))
     params:
-        genome=config.get("mirna_mature_fa"),
+        genome=config.get("resources").get("mirna_mature_fa"),
         output_fmt="BAM"
     conda:
         resolve_single_filepath(
@@ -70,7 +70,7 @@ rule samtools_sort_mirbase1:
             config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
-        genome=config.get("mirna_mature_fa"),
+        genome=config.get("resources").get("mirna_mature_fa"),
         output_fmt="BAM"
     benchmark:
         "benchmarks/samtools/sort/{sample}.txt"
@@ -102,7 +102,7 @@ rule samtools_sort_mirbase2:
             config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
-        genome=config.get("mirna_mature_fa"),
+        genome=config.get("resources").get("mirna_mature_fa"),
         output_fmt="BAM"
     benchmark:
         "benchmarks/samtools/sort/{sample}.txt"
@@ -137,7 +137,7 @@ rule samtools_merge_mirbase:
         "benchmarks/samtools/merge/{sample}.txt"
     params:
         cmd='samtools',
-        genome=config.get("mirna_mature_fa"),
+        genome=config.get("resources").get("mirna_mature_fa"),
         output_fmt="BAM"
     threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
     resources:
@@ -187,7 +187,7 @@ rule samtools_sam_to_bam_hairpin:
     benchmark:
         "benchmarks/samtools/sam_to_bam/{sample}.txt"
     params:
-        genome=config.get("mirna_hairpin_fa"),
+        genome=config.get("resources").get("mirna_hairpin_fa"),
         output_fmt="BAM"
     threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
     resources:
@@ -215,7 +215,7 @@ rule samtools_sort_hairpin:
             config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
-        genome=config.get("mirna_hairpin_fa"),
+        genome=config.get("resources").get("mirna_hairpin_fa"),
         output_fmt="BAM"
     benchmark:
         "benchmarks/samtools/sort_hairpin/{sample}.txt"
@@ -266,7 +266,7 @@ rule samtools_sam_to_bam_pirna:
     benchmark:
         "benchmarks/samtools/sam_to_bam/{sample}.pirna.txt"
     params:
-        genome=config.get("pirna_fa"),
+        genome=config.get("resources").get("pirna_fa"),
         output_fmt="BAM"
     threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
     resources:
@@ -294,7 +294,7 @@ rule samtools_sort_pirna:
             config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
-        genome=config.get("pirna_fa"),
+        genome=config.get("resources").get("pirna_fa"),
         output_fmt="BAM"
     benchmark:
         "benchmarks/samtools/sort/{sample}.pirna.txt"

@@ -52,8 +52,7 @@ rule fastqc_trimmed:
 
 rule mirtrace:
     input:
-        resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/trimmed/{sample}-trimmed.fq")
+        rules.rename_trimmed_fastq.output
     output:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),"mir_trace/{sample}/mirtrace-results.json"),
@@ -87,12 +86,12 @@ rule mirtrace:
 rule multiqc:
     input:
         expand(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"qc/fastqc/untrimmed_{sample.sample}_fastqc.zip"), sample=samples.reset_index().itertuples()),
+            config.get("paths").get("results_dir"),"qc/fastqc/{sample.sample}_fastqc.zip"), sample=samples.reset_index().itertuples()),
 #        expand("qc/fastqc/{sample.sample}_umi_fastqc.zip", sample=samples.reset_index().itertuples()),
         expand(resolve_results_filepath(
             config.get("paths").get("results_dir"),"qc/fastqc/{sample.sample}-trimmed_fastqc.zip"), sample=samples.reset_index().itertuples()),
         expand(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/trimmed/{sample.sample}.fq.gz_trimming_report.txt"), sample=samples.reset_index().itertuples()),
+            config.get("paths").get("results_dir"),"reads/trimmed/{sample.sample}-R1.fq.gz_trimming_report.txt"), sample=samples.reset_index().itertuples()),
         expand(resolve_results_filepath(
             config.get("paths").get("results_dir"),"mir_trace/{sample.sample}/mirtrace-results.json"), sample=samples.reset_index().itertuples()),
         expand(resolve_results_filepath(

@@ -10,12 +10,9 @@ rule fastq_merge:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),"reads/untrimmed/merged/{sample}-R1.fq.gz")
     script:
-        "scripts/merge_units.py"
+        resolve_single_filepath(
+            config.get("paths").get("workdir"), "workflow/scripts/merge_units.py")
 
-
-#def get_fastq(wildcards,samples,read_pair='fq'):
-#    return samples.loc[wildcards.sample,
-#                     [read_pair]].dropna()[0]
 
 rule UMI_tools:
     input:
@@ -23,7 +20,7 @@ rule UMI_tools:
             config.get("paths").get("results_dir"),"reads/untrimmed/merged/{sample}-R1.fq.gz")
     output:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/umi_extract/{sample}_umi.fq.gz")
+            config.get("paths").get("results_dir"),"reads/umi_extract/{sample}-R1.fq.gz")
     conda:
         resolve_single_filepath(
             config.get("paths").get("workdir"), "workflow/envs/umi_tools.yaml")

@@ -26,12 +26,12 @@ rule trimming:
         read1=temp(
             resolve_results_filepath(
                 config.get("paths").get("results_dir"),
-                "reads/trimmed/{sample}_trimmed.fq",
+                "reads/trimmed/{sample}-R1_trimmed.fq",
             )
         ),
         read1_trimming_report=resolve_results_filepath(
             config.get("paths").get("results_dir"),
-            "reads/trimmed/{sample}.fq.gz_trimming_report.txt",
+            "reads/trimmed/{sample}-R1.fq.gz_trimming_report.txt",
         )
     params:
         extra=config.get("params").get("trim_galore").get("arguments"),
