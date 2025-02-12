@@ -6,7 +6,7 @@ import multiprocessing
 from snakemake.utils import validate
 
 
-#validate(config, schema="../schemas/config.schema.yaml")
+# validate(config, schema="../schemas/config.schema.yaml")
 
 
 samples = pd.read_table(config.get("samples"), index_col="sample")
@@ -14,13 +14,17 @@ units = pd.read_table(config.get("units"), index_col=["unit"], dtype=str)
 
 
 ## pipeline-related functions
+# def get_unit_fastqs(wildcards, samples, label="units", read_pair="fq"):
+#     for unit_set in samples.loc[wildcards.sample, [label]]:
+#         wildcards.sample
+#     return [
+#         expand_filepath(units.loc[x, [read_pair]].dropna()[0])
+#         for x in unit_set.split(",")
+#     ]
 def get_unit_fastqs(wildcards, samples, label="units", read_pair="fq"):
     for unit_set in samples.loc[wildcards.sample, [label]]:
-        wildcards.sample
-    return [
-        expand_filepath(units.loc[x, [read_pair]].dropna()[0])
-        for x in unit_set.split(",")
-    ]
+        print(wildcards.sample)
+    return [units.loc[x, [read_pair]].dropna()[0] for x in unit_set.split(",")]
 
 
 ## filepath functions

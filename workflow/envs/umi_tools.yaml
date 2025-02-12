@@ -2,5 +2,6 @@ channels:
   - bioconda
   - conda-forge
   - anaconda
+  - defaults
 dependencies:
   - umitools

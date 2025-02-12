@@ -1,27 +1,11 @@
-
-
-
-
-
-rule pre_rename_fastq:
-    input:
-        r1=lambda wildcards: get_unit_fastqs(wildcards, samples, read_pair="fq1")
-    output:
-        r1=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/untrimmed/{sample}.fq.gz",)
-    conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/bash.yaml"
-        )
-    shell:
-        "cp {input.r1} {output.r1}"
-
-
 rule trimming:
     input:
-        read1=rules.UMI_tools.output
-        #resolve_results_filepath(
-         #   config.get("paths").get("results_dir"),"reads/untrimmed/{sample}.fq.gz")
+        read1=resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/umi_extract/{sample}-R1.fq.gz"
+            if config.get("params").get("umi").get("included") == "Y"
+            else "reads/untrimmed/merged/{sample}-R1.fq.gz",
+        ),
     output:
         read1=temp(
             resolve_results_filepath(
@@ -32,7 +16,7 @@ rule trimming:
         read1_trimming_report=resolve_results_filepath(
             config.get("paths").get("results_dir"),
             "reads/trimmed/{sample}-R1.fq.gz_trimming_report.txt",
-        )
+        ),
     params:
         extra=config.get("params").get("trim_galore").get("arguments"),
         outdir=lambda wildcards, output: os.path.dirname(output.read1),
@@ -64,11 +48,11 @@ rule trimming:
 
 rule rename_trimmed_fastq:
     input:
-        read1=rules.trimming.output.read1
+        read1=rules.trimming.output.read1,
     output:
         read1=resolve_results_filepath(
-            config.get("paths").get("results_dir"),
-            "reads/trimmed/{sample}-trimmed.fq")
+            config.get("paths").get("results_dir"), "reads/trimmed/{sample}-trimmed.fq"
+        ),
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"), "logs/bash/{sample}.log"

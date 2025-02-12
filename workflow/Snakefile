@@ -10,12 +10,14 @@ configfile: "config/config.yaml"
 
 ##### load rules #####
 include: "rules/common.smk"
-include: "rules/umi.smk"
+include: "rules/raw_data.smk"
+include: "rules/umi_qiagen.smk"
 include: "rules/trimming.smk"
 include: "rules/qc.smk"
 include: "rules/mapping.smk"
 include: "rules/samtools.smk"
 include: "rules/count_mirna.smk"
+
 
 ##### local rules #####
 localrules:
@@ -33,7 +35,8 @@ rule all:
             sample=samples.reset_index().itertuples(),
         ),
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"qc/multiqc.html")
+            config.get("paths").get("results_dir"), "qc/multiqc.html"
+        ),
     threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),

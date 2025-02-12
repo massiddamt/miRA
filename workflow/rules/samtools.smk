@@ -1,20 +1,34 @@
 rule samtools_sam_to_bam_mirbase1:
     input:
         sam=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature.sam")
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_mature.sam",
+        ),
     output:
-        bam=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature.bam"))
+        bam=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.mirbase_mature.bam",
+            )
+        ),
     params:
         genome=config.get("resources").get("mirna_mature_fa"),
-        output_fmt="BAM"
+        output_fmt="BAM",
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/view/{sample}_mature1.log",
+        ),
     benchmark:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"benchmarks/samtools/sam_to_bam/{sample}.txt")
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+            config.get("paths").get("results_dir"),
+            "benchmarks/samtools/sam_to_bam/{sample}.txt",
+        )
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -27,24 +41,38 @@ rule samtools_sam_to_bam_mirbase1:
         "-O {params.output_fmt} "
         "{input.sam} "
 
+
 rule samtools_sam_to_bam_mirbase2:
     input:
         sam=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature2.sam")
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_mature2.sam",
+        ),
     output:
-        bam=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature2.bam"))
+        bam=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.mirbase_mature2.bam",
+            )
+        ),
     params:
         genome=config.get("resources").get("mirna_mature_fa"),
-        output_fmt="BAM"
+        output_fmt="BAM",
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/view/{sample}_mature2.log",
+        ),
     benchmark:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"benchmarks/samtools/sam_to_bam/{sample}.txt")
-
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+            config.get("paths").get("results_dir"),
+            "benchmarks/samtools/sam_to_bam/{sample}.txt",
+        )
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -61,20 +89,32 @@ rule samtools_sam_to_bam_mirbase2:
 rule samtools_sort_mirbase1:
     input:
         first=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature.bam")
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_mature.bam",
+        ),
     output:
-        first=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature.sorted.bam"))
+        first=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.mirbase_mature.sorted.bam",
+            )
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/sort/{sample}_mature1.log",
+        ),
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
         genome=config.get("resources").get("mirna_mature_fa"),
-        output_fmt="BAM"
+        output_fmt="BAM",
     benchmark:
         "benchmarks/samtools/sort/{sample}.txt"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -89,24 +129,35 @@ rule samtools_sort_mirbase1:
         "{input.first} "
 
 
-
 rule samtools_sort_mirbase2:
     input:
         second=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature2.bam")
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_mature2.bam",
+        ),
     output:
-        second=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature2.sorted.bam"))
+        second=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.mirbase_mature2.sorted.bam",
+            )
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/sort/{sample}_mature2.log",
+        ),
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
         genome=config.get("resources").get("mirna_mature_fa"),
-        output_fmt="BAM"
+        output_fmt="BAM",
     benchmark:
         "benchmarks/samtools/sort/{sample}.txt"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -123,23 +174,34 @@ rule samtools_sort_mirbase2:
 
 rule samtools_merge_mirbase:
     input:
-        first = resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature.sorted.bam"),
-        second = resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_mature2.sorted.bam")
+        first=resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_mature.sorted.bam",
+        ),
+        second=resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_mature2.sorted.bam",
+        ),
     output:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirna.bam")
+            config.get("paths").get("results_dir"), "reads/aligned/{sample}.mirna.bam"
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/merge/{sample}_mature.log",
+        ),
     benchmark:
         "benchmarks/samtools/merge/{sample}.txt"
     params:
-        cmd='samtools',
+        cmd="samtools",
         genome=config.get("resources").get("mirna_mature_fa"),
-        output_fmt="BAM"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+        output_fmt="BAM",
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -155,14 +217,22 @@ rule samtools_merge_mirbase:
 
 rule index_mirbase:
     input:
-        rules.samtools_merge_mirbase.output
+        rules.samtools_merge_mirbase.output,
     output:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirna.bam.bai")
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirna.bam.bai",
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/index/{sample}_mature.log",
+        ),
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -172,24 +242,35 @@ rule index_mirbase:
         "{input}"
 
 
-
 ### hairpin
 rule samtools_sam_to_bam_hairpin:
     input:
-        second=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_hairpin.sam")
+        hairpin=resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_hairpin.sam",
+        ),
     output:
-        second=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_hairpin.bam"))
+        hairpin=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.mirbase_hairpin.bam",
+            )
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/view/{sample}_hairpin.log",
+        ),
     benchmark:
         "benchmarks/samtools/sam_to_bam/{sample}.txt"
     params:
         genome=config.get("resources").get("mirna_hairpin_fa"),
-        output_fmt="BAM"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+        output_fmt="BAM",
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -198,28 +279,38 @@ rule samtools_sam_to_bam_hairpin:
         "samtools view -b "
         "--threads {threads} "
         "-T {params.genome} "
-        "-o {output.second} "
+        "-o {output.hairpin} "
         "-O {params.output_fmt} "
-        "{input.second} "
+        "{input.hairpin} "
 
 
 rule samtools_sort_hairpin:
     input:
-        first=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_hairpin.bam")
+        hairpin=resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_hairpin.bam",
+        ),
     output:
-        first=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_hairpin.sorted.bam"))
+        hairpin=resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_hairpin.sorted.bam",
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/sort/{sample}_hairpin.log",
+        ),
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
         genome=config.get("resources").get("mirna_hairpin_fa"),
-        output_fmt="BAM"
+        output_fmt="BAM",
     benchmark:
         "benchmarks/samtools/sort_hairpin/{sample}.txt"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -230,20 +321,28 @@ rule samtools_sort_hairpin:
         "-T {params.tmp_dir} "
         "-O {params.output_fmt} "
         "--reference {params.genome} "
-        "-o {output.first} "
-        "{input.first} "
+        "-o {output.hairpin} "
+        "{input.hairpin} "
 
 
 rule index_hairpin:
     input:
-        rules.samtools_sort_hairpin.output
+        rules.samtools_sort_hairpin.output.hairpin,
     output:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.mirbase_hairpin.sorted.bam.bai")
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.mirbase_hairpin.sorted.bam.bai",
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/index/{sample}_hairpin.log",
+        ),
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -252,23 +351,35 @@ rule index_hairpin:
         "samtools index "
         "{input}"
 
+
 ### pirna
 rule samtools_sam_to_bam_pirna:
     input:
         second=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.piRNA.sam")
+            config.get("paths").get("results_dir"), "reads/aligned/{sample}.piRNA.sam"
+        ),
     output:
-        second=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.piRNA.bam"))
+        second=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.piRNA.bam",
+            )
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/view/{sample}_pirna.log",
+        ),
     benchmark:
         "benchmarks/samtools/sam_to_bam/{sample}.pirna.txt"
     params:
         genome=config.get("resources").get("pirna_fa"),
-        output_fmt="BAM"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+        output_fmt="BAM",
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -285,20 +396,31 @@ rule samtools_sam_to_bam_pirna:
 rule samtools_sort_pirna:
     input:
         first=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.piRNA.bam")
+            config.get("paths").get("results_dir"), "reads/aligned/{sample}.piRNA.bam"
+        ),
     output:
-        first=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.piRNA.sorted.bam"))
+        first=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.piRNA.sorted.bam",
+            )
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/sort/{sample}_pirna.log",
+        ),
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
         genome=config.get("resources").get("pirna_fa"),
-        output_fmt="BAM"
+        output_fmt="BAM",
     benchmark:
         "benchmarks/samtools/sort/{sample}.pirna.txt"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -315,14 +437,22 @@ rule samtools_sort_pirna:
 
 rule index_pirna:
     input:
-        rules.samtools_sort_pirna.output
+        rules.samtools_sort_pirna.output,
     output:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.piRNA.sorted.bam.bai")
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.piRNA.sorted.bam.bai",
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/index/{sample}_pirna.log",
+        ),
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -331,25 +461,37 @@ rule index_pirna:
         "samtools index "
         "{input}"
 
+
 #### genome
 
 
 rule samtools_sam_to_bam_genome:
     input:
         second=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.genome.sam")
+            config.get("paths").get("results_dir"), "reads/aligned/{sample}.genome.sam"
+        ),
     output:
-        second=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.genome.bam"))
+        second=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.genome.bam",
+            )
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/view/{sample}_genome.log",
+        ),
     benchmark:
         "benchmarks/samtools/sam_to_bam/{sample}.genome.txt"
     params:
         genome=config.get("resources").get("reference"),
-        output_fmt="BAM"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+        output_fmt="BAM",
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -366,20 +508,31 @@ rule samtools_sam_to_bam_genome:
 rule samtools_sort_genome:
     input:
         first=resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.genome.bam")
+            config.get("paths").get("results_dir"), "reads/aligned/{sample}.genome.bam"
+        ),
     output:
-        first=temp(resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.genome.sorted.bam"))
+        first=temp(
+            resolve_results_filepath(
+                config.get("paths").get("results_dir"),
+                "reads/aligned/{sample}.genome.sorted.bam",
+            )
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/sort/{sample}_genome.log",
+        ),
     params:
         tmp_dir=config.get("paths").get("tmp_dir"),
         genome=config.get("resources").get("reference"),
-        output_fmt="BAM"
+        output_fmt="BAM",
     benchmark:
         "benchmarks/samtools/sort/{sample}.genome.txt"
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -396,14 +549,22 @@ rule samtools_sort_genome:
 
 rule index_genome:
     input:
-        rules.samtools_sort_genome.output
+        rules.samtools_sort_genome.output,
     output:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/aligned/{sample}.genome.sorted.bam.bai")
+            config.get("paths").get("results_dir"),
+            "reads/aligned/{sample}.genome.sorted.bam.bai",
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/index/{sample}_genome.log",
+        ),
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
@@ -415,14 +576,55 @@ rule index_genome:
 
 rule index_deduplicated_bam:
     input:
-        rules.umi_deduplication.output
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/dedup/{sample}.mirna_dedup.bam",
+        ),
     output:
         resolve_results_filepath(
-            config.get("paths").get("results_dir"),"reads/dedup/{sample}.mirna_dedup.bam.bai")
+            config.get("paths").get("results_dir"),
+            "reads/dedup/{sample}.mirna_dedup.bam.bai",
+        ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"),"workflow/envs/samtools.yaml")
-    threads: conservative_cpu_count(reserve_cores=2,max_cores=99)
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/index/{sample}_dedup_mature.log",
+        ),
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
+    resources:
+        tmpdir=config.get("paths").get("tmp_dir"),
+    message:
+        "Mapping reads against GENOME with {threads} threads for the following files {input}."
+    shell:
+        "samtools index "
+        "{input}"
+
+
+rule index_deduplicated_hairpin_bam:
+    input:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/dedup/{sample}.hairpin_dedup.bam",
+        ),
+    output:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "reads/dedup/{sample}.hairpin_dedup.bam.bai",
+        ),
+    conda:
+        resolve_single_filepath(
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
+    log:
+        resolve_results_filepath(
+            config.get("paths").get("results_dir"),
+            "logs/samtools/index/{sample}_dedup_hairpin.log",
+        ),
+    threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
     message:
