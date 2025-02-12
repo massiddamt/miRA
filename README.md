@@ -1,5 +1,5 @@
 # Snakemake workflow: miRA - miRNA Analysis
-[![Snakemake](https://img.shields.io/badge/snakemake-≥7.18.1-brightgreen.svg)](https://snakemake.bitbucket.io)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥8.27.1-brightgreen.svg)](https://snakemake.bitbucket.io)
 
 This workflow performs miRNA analysis from `fastq` to `counts`.
 
@@ -16,7 +16,7 @@ If you use this workflow in a paper, don't forget to give credits to the authors
 ## INSTRUCTIONS
 Create a virtual environment with the command:
 ```commandline
-mamba create -c bioconda -c conda-forge --name snakemake snakemake=7.18.1 snakedeploy
+conda create -c conda-forge -c bioconda --name snakemake snakemake=8.27.1 snakedeploy
 ```
 and activate it:
 ```commandline

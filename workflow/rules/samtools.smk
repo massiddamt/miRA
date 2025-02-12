@@ -15,9 +15,7 @@ rule samtools_sam_to_bam_mirbase1:
         genome=config.get("resources").get("mirna_mature_fa"),
         output_fmt="BAM",
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -59,14 +57,12 @@ rule samtools_sam_to_bam_mirbase2:
         genome=config.get("resources").get("mirna_mature_fa"),
         output_fmt="BAM",
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
-            "logs/samtools/view/{sample}_mature2.log",
-        ),
+            "logs/samtools/view/{sample}_mature2.log"
+        )
     benchmark:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -100,9 +96,7 @@ rule samtools_sort_mirbase1:
             )
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -143,9 +137,7 @@ rule samtools_sort_mirbase2:
             )
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -187,9 +179,7 @@ rule samtools_merge_mirbase:
             config.get("paths").get("results_dir"), "reads/aligned/{sample}.mirna.bam"
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -224,9 +214,7 @@ rule index_mirbase:
             "reads/aligned/{sample}.mirna.bam.bai",
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -257,9 +245,7 @@ rule samtools_sam_to_bam_hairpin:
             )
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -296,9 +282,7 @@ rule samtools_sort_hairpin:
             "reads/aligned/{sample}.mirbase_hairpin.sorted.bam",
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -334,9 +318,7 @@ rule index_hairpin:
             "reads/aligned/{sample}.mirbase_hairpin.sorted.bam.bai",
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -366,9 +348,7 @@ rule samtools_sam_to_bam_pirna:
             )
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -406,9 +386,7 @@ rule samtools_sort_pirna:
             )
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -444,9 +422,7 @@ rule index_pirna:
             "reads/aligned/{sample}.piRNA.sorted.bam.bai",
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -478,9 +454,7 @@ rule samtools_sam_to_bam_genome:
             )
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -518,9 +492,7 @@ rule samtools_sort_genome:
             )
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -556,9 +528,7 @@ rule index_genome:
             "reads/aligned/{sample}.genome.sorted.bam.bai",
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -586,9 +556,7 @@ rule index_deduplicated_bam:
             "reads/dedup/{sample}.mirna_dedup.bam.bai",
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -616,9 +584,7 @@ rule index_deduplicated_hairpin_bam:
             "reads/dedup/{sample}.hairpin_dedup.bam.bai",
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
-        )
+        "workflow/envs/samtools.yaml"
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),

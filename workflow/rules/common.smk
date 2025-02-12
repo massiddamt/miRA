@@ -14,13 +14,7 @@ units = pd.read_table(config.get("units"), index_col=["unit"], dtype=str)
 
 
 ## pipeline-related functions
-# def get_unit_fastqs(wildcards, samples, label="units", read_pair="fq"):
-#     for unit_set in samples.loc[wildcards.sample, [label]]:
-#         wildcards.sample
-#     return [
-#         expand_filepath(units.loc[x, [read_pair]].dropna()[0])
-#         for x in unit_set.split(",")
-#     ]
+
 def get_unit_fastqs(wildcards, samples, label="units", read_pair="fq"):
     for unit_set in samples.loc[wildcards.sample, [label]]:
         print(wildcards.sample)

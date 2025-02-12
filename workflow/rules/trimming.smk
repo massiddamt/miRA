@@ -28,9 +28,7 @@ rule trimming:
             config.get("paths").get("results_dir"), "logs/trim_galore/{sample}.log"
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/trim_galore.yaml"
-        )
+        "workflow/envs/trim_galore.yaml"
     threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
@@ -58,9 +56,7 @@ rule rename_trimmed_fastq:
             config.get("paths").get("results_dir"), "logs/bash/{sample}.log"
         ),
     conda:
-        resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/bash.yaml"
-        )
+        "workflow/envs/bash.yaml"
     threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),
