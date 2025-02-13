@@ -61,8 +61,8 @@ rule samtools_sam_to_bam_mirbase2:
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
-            "logs/samtools/view/{sample}_mature2.log"
-        )
+            "logs/samtools/view/{sample}_mature2.log",
+        ),
     benchmark:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),

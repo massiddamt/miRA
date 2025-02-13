@@ -2,9 +2,11 @@ rule trimming:
     input:
         read1=resolve_results_filepath(
             config.get("paths").get("results_dir"),
-            "reads/umi_extract/{sample}-R1.fq.gz"
-            if config.get("params").get("umi").get("included") == "Y"
-            else "reads/untrimmed/merged/{sample}-R1.fq.gz",
+            (
+                "reads/umi_extract/{sample}-R1.fq.gz"
+                if config.get("params").get("umi").get("included") == "Y"
+                else "reads/untrimmed/merged/{sample}-R1.fq.gz"
+            ),
         ),
     output:
         read1=temp(

@@ -15,6 +15,7 @@ units = pd.read_table(config.get("units"), index_col=["unit"], dtype=str)
 
 ## pipeline-related functions
 
+
 def get_unit_fastqs(wildcards, samples, label="units", read_pair="fq"):
     for unit_set in samples.loc[wildcards.sample, [label]]:
         print(wildcards.sample)
