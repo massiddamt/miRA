@@ -6,7 +6,10 @@ min_version("8.27.1")
 
 ##### setup report #####
 configfile: "config/config.yaml"
+
+
 workdir: config.get("paths").get("workdir")
+
 
 ##### load rules #####
 include: "rules/common.smk"
