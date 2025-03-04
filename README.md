@@ -16,7 +16,7 @@ If you use this workflow in a paper, don't forget to give credits to the authors
 ## INSTRUCTIONS
 Create a virtual environment with the command:
 ```commandline
-conda create -c conda-forge -c bioconda --name snakemake snakemake=8.27.1 snakedeploy
+conda create -c conda-forge -c bioconda --name snakemake snakemake=8.27.1 conda=24.7.1 snakedeploy
 ```
 and activate it:
 ```commandline
@@ -26,7 +26,7 @@ You can perform the pipeline deploy defining a directory `my_dest_dir` for analy
 ```bash
 snakedeploy deploy-workflow https://github.com/massiddamt/miRA.git 
                     my_desd_dir 
-                    --tag v1.0.1
+                    --tag v1.0.2
 ```
 To run the pipeline, go inside the deployed pipeline folder and use the command:
 ```bash

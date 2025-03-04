@@ -14,6 +14,10 @@ resources:
 
 
 params:
+    umi:
+        included: "Y"
+        qiagen_bc_pattern: "AACTGTAGGCACCATCAAT"
+        umi_length: "12"
     trim_galore:
         arguments: "--trim-n --length 16 --max_length 50 --dont_gzip "
     multiqc:

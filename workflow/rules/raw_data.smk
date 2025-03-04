@@ -7,7 +7,8 @@ rule fastq_merge:
             "reads/untrimmed/merged/{sample}-R1.fq.gz",
         ),
     conda:
-        "workflow/envs/bash.yaml"
+        resolve_single_filepath(
+            config.get("paths").get("workdir"), "workflow/envs/bash.yaml")
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
