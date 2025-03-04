@@ -3,10 +3,10 @@ rule fastqc:
         rules.fastq_merge.output,
     output:
         html=resolve_results_filepath(
-            config.get("paths").get("results_dir"), "qc/fastqc/{sample}.html"
+            config.get("paths").get("results_dir"), "qc/fastqc/{sample}-R1_fastqc.html"
         ),
         zip=resolve_results_filepath(
-            config.get("paths").get("results_dir"), "qc/fastqc/{sample}_fastqc.zip"
+            config.get("paths").get("results_dir"), "qc/fastqc/{sample}-R1_fastqc.zip"
         ),
     log:
         resolve_results_filepath(
@@ -104,7 +104,7 @@ rule multiqc:
         fastqc=expand(
             resolve_results_filepath(
                 config.get("paths").get("results_dir"),
-                "qc/fastqc/{sample.sample}_fastqc.zip",
+                "qc/fastqc/{sample.sample}-R1_fastqc.zip",
             ),
             sample=samples.reset_index().itertuples(),
         ),

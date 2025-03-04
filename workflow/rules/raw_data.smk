@@ -20,4 +20,5 @@ rule fastq_merge:
     message:
         "merge fastq files {input}."
     script:
-        "workflow/scripts/merge_units.py"
+        resolve_single_filepath(
+            config.get("paths").get("workdir"), "merge_units.py")
