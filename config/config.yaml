@@ -1,5 +1,6 @@
 samples: config/samples.tsv
 units: config/units.tsv
+reheader: config/reheader.tsv
 
 resources:
     reference: /path/to/reference/reference_genome.fasta

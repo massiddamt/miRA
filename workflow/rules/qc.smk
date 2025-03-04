@@ -17,7 +17,8 @@ rule fastqc:
         outdir=lambda w, output: os.path.dirname(output.zip),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/fastqc.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/fastqc.yaml"
+        )
     shell:
         "fastqc "
         "{input} "
@@ -48,7 +49,8 @@ rule fastqc_trimmed:
         outdir=lambda w, output: os.path.dirname(output.zip),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/fastqc.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/fastqc.yaml"
+        )
     shell:
         "fastqc "
         "{input} "
@@ -79,7 +81,8 @@ rule mirtrace:
         ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/mirtrace.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/mirtrace.yaml"
+        )
     params:
         outdir=lambda w, output: os.path.dirname(output[0]),
         params="--force",
@@ -170,7 +173,8 @@ rule multiqc:
         reheader=config.get("reheader"),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/multiqc.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/multiqc.yaml"
+        )
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"), "logs/multiqc/multiqc.log"

@@ -8,7 +8,8 @@ rule fastq_merge:
         ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/bash.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/bash.yaml"
+        )
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -21,4 +22,5 @@ rule fastq_merge:
         "merge fastq files {input}."
     script:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "merge_units.py")
+            config.get("paths").get("workdir"), "workflow/scripts/merge_units.py"
+        )

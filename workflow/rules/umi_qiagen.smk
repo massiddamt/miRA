@@ -14,7 +14,8 @@ rule UMI_tools_qiagen:
         umi_length=config.get("params").get("umi").get("umi_length"),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/umi_tools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/umi_tools.yaml"
+        )
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -52,7 +53,8 @@ rule umi_deduplication_mature_qiagen:
         ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/umi_tools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/umi_tools.yaml"
+        )
     threads: conservative_cpu_count(reserve_cores=2, max_cores=99)
     resources:
         tmpdir=config.get("paths").get("tmp_dir"),

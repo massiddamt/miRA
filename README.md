@@ -26,9 +26,9 @@ You can perform the pipeline deploy defining a directory `my_dest_dir` for analy
 ```bash
 snakedeploy deploy-workflow https://github.com/massiddamt/miRA.git 
                     my_desd_dir 
-                    --tag v1.0.2
+                    --tag v1.1.0
 ```
 To run the pipeline, go inside the deployed pipeline folder and use the command:
 ```bash
-snakemake --use-conda -p --cores all
+snakemake --use-conda --conda-frontend conda -p --cores all
 ```

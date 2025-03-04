@@ -23,7 +23,8 @@ rule count_mirbase_mature:
         ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -60,7 +61,8 @@ rule count_mirbase_hairpin:
         ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -88,7 +90,8 @@ rule count_pirna:
         ),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/samtools.yaml"
+        )
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
@@ -118,7 +121,8 @@ rule htseq_genome:
         gff=config.get("resources").get("htseq_gff"),
     conda:
         resolve_single_filepath(
-            config.get("paths").get("workdir"), "workflow/envs/htseq.yaml")
+            config.get("paths").get("workdir"), "workflow/envs/htseq.yaml"
+        )
     log:
         resolve_results_filepath(
             config.get("paths").get("results_dir"),
